@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HaloAi | Experience the Future</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #FFD700; --gold-light: #f0d080; --black: #0a0a0a; }
+        body { background: var(--black); color: #fff; font-family: 'Orbitron', sans-serif; overflow: hidden; height: 100vh; margin: 0; }
+        .scene { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; }
+        .scene.active { opacity: 1; pointer-events: all; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .halo-ring { width: 300px; height: 300px; border-radius: 50%; border: 2px solid var(--gold); animation: spin 12s linear infinite; position: relative; }
+        .logo-text { font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, #c9a84c, var(--gold-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .skip-btn { position: fixed; bottom: 30px; right: 30px; color: var(--gold); border: 1px solid var(--gold); padding: 10px 24px; border-radius: 50px; cursor: pointer; transition: 0.3s; z-index: 100; text-transform: uppercase; font-size: 12px; }
+        .skip-btn:hover { background: var(--gold); color: black; }
+        #particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="scene active" id="scene1">
+        <div class="halo-ring flex items-center justify-center">
+            <div style="animation: spin 12s linear infinite reverse">
+                <h1 class="logo-text">HaloAI</h1>
+            </div>
+        </div>
+        <p class="mt-8 tracking-[0.3em] text-sm text-[#FFD700]">THE FUTURE OF INTEGRATION</p>
+    </div>
+
+    <div class="scene" id="scene2">
+        <h2 class="text-4xl mb-4 text-[#FFD700]">Real-Time Processing</h2>
+        <div class="w-24 h-px bg-gradient-to-r from-transparent via-[#FFD700] to-transparent"></div>
+        <p class="mt-4 font-serif italic text-gray-400">Scalable. Modular. Powerful.</p>
+    </div>
+
+    <button class="skip-btn" onclick="finishIntro()">Skip Intro →</button>
+
+    <script>
+        let currentScene = 1;
+        const totalScenes = 2;
+
+        function nextScene() {
+            const current = document.getElementById(`scene${currentScene}`);
+            if (current) current.classList.remove('active');
+            currentScene++;
+            if (currentScene <= totalScenes) {
+                const next = document.getElementById(`scene${currentScene}`);
+                if (next) next.classList.add('active');
+            } else {
+                finishIntro();
+            }
+        }
+
+        function finishIntro() {
+            document.body.style.opacity = '0';
+            setTimeout(() => { window.location.href = "index.html"; }, 800);
+        }
+
+        setInterval(nextScene, 3500);
+
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+            }
+            update() { this.x += this.speedX; this.y += this.speedY; }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 215, 0, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        const particleArray = Array.from({ length: 60 }, () => new Particle());
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particleArray.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
