@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HaloAiStudios | Revolutionary AI Entertainment & Productivity Suite</title>
+    <meta name="description" content="HaloAiStudios: AI-powered entertainment, productivity, and social apps. Lifetime $1 access or monthly subscription.">
+    <meta name="keywords" content="AI apps, entertainment, productivity, streaming, gaming, SaaS">
+
+    <!-- Tailwind CSS & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Modular CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#0a0a0a] text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-[#FFD700]/20">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="golden-text text-2xl font-black tracking-tighter">✨ HALOAISTUDIOS</div>
+            
+            <!-- Desktop Menu -->
+            <div id="desktop-menu" class="hidden md:flex items-center gap-10 text-sm font-medium">
+                <a href="#apps" class="hover:text-[#FFD700] transition-colors">Apps</a>
+                <a href="#features" class="hover:text-[#FFD700] transition-colors">Features</a>
+                <a href="#pricing" class="hover:text-[#FFD700] transition-colors">Pricing</a>
+                <a href="#contact" class="hover:text-[#FFD700] transition-colors">Contact</a>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button id="hamburger" class="md:hidden w-10 h-10 flex items-center justify-center text-3xl focus:outline-none">
+                ☰
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border-t border-[#FFD700]/20 py-6">
+            <div class="flex flex-col items-center gap-6 text-lg">
+                <a href="#apps" class="hover:text-[#FFD700]">Apps</a>
+                <a href="#features" class="hover:text-[#FFD700]">Features</a>
+                <a href="#pricing" class="hover:text-[#FFD700]">Pricing</a>
+                <a href="#contact" class="hover:text-[#FFD700]">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Three.js Background -->
+    <canvas id="threejs-canvas" class="fixed inset-0 z-[-1]"></canvas>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Intro Video -->
+        <div class="intro-video-container absolute inset-0">
+            <video id="intro-video" autoplay muted loop playsinline 
+                   class="w-full h-full object-cover scale-110"
+                   poster="https://placehold.co/1920x1080/0a0a0a/FFD700?text=HaloAiStudios+Intro">
+                <source src="https://assets.mixkit.co/videos/preview/75492/75492-large.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/30 via-[#0a0a0a]/70 to-[#0a0a0a]"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+            <div class="mb-6 inline-flex items-center gap-3 bg-white/5 backdrop-blur-md px-6 py-2 rounded-full border border-[#FFD700]/30">
+                <div class="w-2 h-2 bg-[#FFD700] rounded-full animate-pulse"></div>
+                <span class="text-sm tracking-widest uppercase">Now in Early Access</span>
+            </div>
+
+            <h1 class="hero-title text-6xl md:text-7xl lg:text-[5.5rem] leading-none font-black golden-text mb-6 tracking-tighter">
+                REVOLUTIONARY AI<br>ENTERTAINMENT &amp; PRODUCTIVITY
+            </h1>
+
+            <p class="section-subtitle max-w-2xl mx-auto text-xl md:text-2xl mb-10 text-gray-200">
+                HaloAiStudios merges storytelling, innovation, and human-centric AI.<br>
+                <span class="text-[#FFD700]">One suite. Infinite possibilities.</span>
+            </p>
+
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button onclick="scrollToSection('apps')" 
+                        class="cta-btn text-lg px-10 py-5">
+                    Explore Apps
+                </button>
+                <button onclick="scrollToSection('pricing')" 
+                        class="cta-btn cta-btn-secondary text-lg px-10 py-5">
+                    Get $1 Lifetime Access
+                </button>
+                <button onclick="toggleVideo()" 
+                        class="cta-btn cta-btn-secondary flex items-center gap-3 text-lg px-8 py-5">
+                    <span class="text-2xl">▶</span> Watch 60s Intro
+                </button>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs text-gray-400">
+            <div class="w-px h-12 bg-gradient-to-b from-transparent via-[#FFD700]/40 to-transparent"></div>
+            SCROLL TO EXPLORE
+        </div>
+    </section>
+
+    <!-- ===== APPS SECTION (FULL LIST ADDED) ===== -->
+    <section id="apps" class="section py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="section-title golden-text text-center mb-4">CORE APPS</h2>
+            <p class="section-subtitle text-center max-w-xl mx-auto mb-16">
+                Eleven groundbreaking AI-powered experiences
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="apps-grid">
+
+                <!-- 1. Epic AI Battle -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/epic /grok_image_1771883654588.jpg" alt="Epic AI Battle" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Gaming & Entertainment</div>
+                    <h3 class="golden-text text-2xl mb-3">🎮 Epic AI Battle</h3>
+                    <p class="text-gray-300 mb-4">A multiplayer AI combat game where players train and control AI fighters. Dynamic battles, strategic upgrades, and AI that learns from every encounter.</p>
+                    <p class="text-sm text-gray-400 mb-6">Available Now</p>
+                    <a href="/apps/epic-ai-battle" class="cta-btn text-sm w-full justify-center">Play Battle</a>
+                </div>
+
+                <!-- 2. Motivabot -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/motivabot/grok-image-a4ae6d89-42cf-40af-83b9-40a9e778c57b.png.jpg">
+                    <div class="badge">Productivity</div>
+                    <h3 class="golden-text text-2xl mb-3">🤖 Motivabot</h3>
+                    <p class="text-gray-300 mb-4">A productivity assistant that tracks goals, provides personalized motivation, tailored reminders, progress insights, and motivational quotes.</p>
+                    <p class="text-sm text-gray-400 mb-6">Available Now</p>
+                    <a href="/apps/motivabot" class="cta-btn text-sm w-full justify-center">Get Motivated</a>
+                </div>
+
+                <!-- 3. MyfamilyDynasty -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/famdynasty/grok_image_1771883743764.jpg" alt="MyfamilyDynasty" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Creativity</div>
+                    <h3 class="golden-text text-2xl mb-3">👨‍👩‍👧‍👦 MyfamilyDynasty</h3>
+                    <p class="text-gray-300 mb-4">Document family history, build digital trees, share stories, events, and photos to preserve your legacy across generations.</p>
+                    <p class="text-sm text-gray-400 mb-6">Coming Soon</p>
+                    <a href="/apps/myfamily-dynasty" class="cta-btn text-sm w-full justify-center">Start Tree</a>
+                </div>
+
+                <!-- 4. Superstar Broadcast Hub -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/broadcast/grok_image_1771887997169.jpg" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Social & Broadcasting</div>
+                    <h3 class="golden-text text-2xl mb-3">🎙️ Superstar Broadcast Hub</h3>
+                    <p class="text-gray-300 mb-4">Streaming & podcast toolkit with AI moderation, real-time engagement, and professional tools.</p>
+                    <p class="text-sm text-gray-400 mb-6">Go Live</p>
+                    <a href="/apps/broadcast-hub" class="cta-btn text-sm w-full justify-center">Start Stream</a>
+                </div>
+
+                <!-- 5. VoxCharade -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/vox/grok_image_1771884035770.jpg" alt="VoxCharade" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Gaming & Entertainment</div>
+                    <h3 class="golden-text text-2xl mb-3">🎭 VoxCharade</h3>
+                    <p class="text-gray-300 mb-4">Voice-activated multiplayer charades. Give clues with your voice — AI tracks progress and scores in real-time.</p>
+                    <p class="text-sm text-gray-400 mb-6">Coming Soon</p>
+                    <a href="/apps/vox-charade" class="cta-btn text-sm w-full justify-center">Play Game</a>
+                </div>
+
+                <!-- 6. Retro Texting -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/retro/grok_image_1771884341542.jpg" alt="Retro Texting" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Entertainment</div>
+                    <h3 class="golden-text text-2xl mb-3">📱 Retro Texting</h3>
+                    <p class="text-gray-300 mb-4">Nostalgic 2000s messaging with flip-phone aesthetics, retro filters, group chats, and modern multimedia.</p>
+                    <p class="text-sm text-gray-400 mb-6">Available Now</p>
+                    <a href="/apps/retro-texting" class="cta-btn text-sm w-full justify-center">Send Retro</a>
+                </div>
+
+                <!-- 7. Gayscape Connect -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/gayscape/grok_image_1771883594683.jpg" alt="Gayscape Connect" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Social & Community</div>
+                    <h3 class="golden-text text-2xl mb-3">🌈 Gayscape Connect</h3>
+                    <p class="text-gray-300 mb-4">A social platform bridging gay and straight communities through open, honest conversations and authentic connections.</p>
+                    <p class="text-sm text-gray-400 mb-6">Coming Soon</p>
+                    <a href="/apps/gayscape-connect" class="cta-btn text-sm w-full justify-center">Join Now</a>
+                </div>
+
+                <!-- 8. MyFridayAi -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/friday/grok_image_1771884467895.jpg" alt="MyFridayAi" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Productivity</div>
+                    <h3 class="golden-text text-2xl mb-3">💬 MyFridayAi</h3>
+                    <p class="text-gray-300 mb-4">Personal AI assistant that balances work & life, organizes tasks, learns your preferences, and optimizes your schedule.</p>
+                    <p class="text-sm text-gray-400 mb-6">Coming Soon</p>
+                    <a href="/apps/myfriday-ai" class="cta-btn text-sm w-full justify-center">Chat Now</a>
+                </div>
+
+                <!-- 9. Courthouse.Ai -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/courthouse/grok_image_1771884571106.jpg" alt="Courthouse.Ai" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Gaming & Entertainment</div>
+                    <h3 class="golden-text text-2xl mb-3">⚖️ Courthouse.Ai</h3>
+                    <p class="text-gray-300 mb-4">AI-powered virtual lawyer simulation. Legal research, document drafting, case management — all in an interactive game format.</p>
+                    <p class="text-sm text-gray-400 mb-6">Available Now</p>
+                    <a href="/apps/courthouse-ai" class="cta-btn text-sm w-full justify-center">Play Simulation</a>
+                </div>
+
+                <!-- 10. VibeKaraoke -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/kareoke/grok_image_1771884708244.jpg" alt="VibeKaraoke" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Social & Entertainment</div>
+                    <h3 class="golden-text text-2xl mb-3">🎤 VibeKaraoke</h3>
+                    <p class="text-gray-300 mb-4">High-performance AI-driven karaoke platform. Real-time vocal effects, live duets, and neon-stage immersion.</p>
+                    <ul class="text-left text-sm text-gray-400 mb-4 space-y-1">
+                        <li>• Vibe Engine (Autotune + Reverb)</li>
+                        <li>• Live Duets with WebRTC</li>
+                        <li>• AI Stagehand & Performance Analytics</li>
+                    </ul>
+                    <p class="text-sm text-gray-400 mb-6">Coming Soon</p>
+                    <a href="/apps/vibe-karaoke" class="cta-btn text-sm w-full justify-center">Sing Now</a>
+                </div>
+
+                <!-- 11. MychildSimAi -->
+                <div class="app-card glass-panel p-8 animate-on-scroll">
+                    <img src="/assets/mychild/grok_image_1771884913337.jpg" alt="MychildSimAi" class="app-image w-full h-48 object-cover rounded-2xl mb-6">
+                    <div class="badge">Simulation & Family</div>
+                    <h3 class="golden-text text-2xl mb-3">👶 MychildSimAi</h3>
+                    <p class="text-gray-300 mb-4">Virtual parenting simulation. Raise an AI child, make real decisions on development, education, and social life.</p>
+                    <p class="text-sm text-gray-400 mb-6">Coming Soon</p>
+                    <a href="/apps/mychild-sim-ai" class="cta-btn text-sm w-full justify-center">Start Simulation</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section id="features" class="section py-24 bg-black/40">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="animate-on-scroll">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%230a0a0a' width='400' height='400'/%3E%3Ccircle cx='200' cy='200' r='150' fill='%23FFD700' opacity='0.1'/%3E%3Cpath d='M200 100 L300 300 L100 300 Z' fill='%23FFA500' opacity='0.2'/%3E%3C/svg%3E" 
+                     class="w-full rounded-3xl" alt="Golden AI">
+            </div>
+            <div class="space-y-12">
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon text-5xl mb-4">✨</div>
+                    <h3 class="golden-text text-3xl mb-3">Human-Centric AI</h3>
+                    <p class="text-gray-400 text-lg">AI that amplifies your creativity — never replaces it.</p>
+                </div>
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon text-5xl mb-4">🎨</div>
+                    <h3 class="golden-text text-3xl mb-3">Golden Aesthetic</h3>
+                    <p class="text-gray-400 text-lg">Premium UI with gold, glassmorphism, and 3D particle effects.</p>
+                </div>
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon text-5xl mb-4">🌐</div>
+                    <h3 class="golden-text text-3xl mb-3">Inclusive Design</h3>
+                    <p class="text-gray-400 text-lg">Safe, welcoming spaces built for everyone.</p>
+                </div>
+                <div class="feature-item animate-on-scroll">
+                    <div class="feature-icon text-5xl mb-4">⚡</div>
+                    <h3 class="golden-text text-3xl mb-3">Cutting-Edge Tech</h3>
+                    <p class="text-gray-400 text-lg">React, Node.js, Three.js, WebRTC & GPT-style LLMs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH STACK, PRICING, TESTIMONIALS (unchanged from previous advanced version) -->
+    <!-- ... (copy the sections from your previous code) ... -->
+
+    <!-- Modular JS -->
+    <script src="script.js"></script>
+</body>
+</html>
